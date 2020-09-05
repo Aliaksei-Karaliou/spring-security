@@ -1,11 +1,11 @@
-package com.github.aliakseikaraliou.springsecrity
+package com.github.aliakseikaraliou.springsecurity
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class SpringSecrityApplication
+class SpringSecurityApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringSecrityApplication>(*args)
+    runApplication<SpringSecurityApplication>(*args)
 }

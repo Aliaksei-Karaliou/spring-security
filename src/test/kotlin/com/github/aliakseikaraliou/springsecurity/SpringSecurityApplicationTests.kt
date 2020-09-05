@@ -1,10 +1,10 @@
-package com.github.aliakseikaraliou.springsecrity
+package com.github.aliakseikaraliou.springsecurity
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class SpringSecrityApplicationTests {
+class SpringSecurityApplicationTests {
 
     @Test
     fun contextLoads() {
