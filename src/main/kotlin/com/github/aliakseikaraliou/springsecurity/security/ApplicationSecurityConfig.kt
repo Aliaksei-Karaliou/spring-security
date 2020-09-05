@@ -14,6 +14,7 @@ class ApplicationSecurityConfig : WebSecurityConfigurerAdapter() {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
+                .antMatchers("/", "index").permitAll()
                 .anyRequest().authenticated()
     }
 }
