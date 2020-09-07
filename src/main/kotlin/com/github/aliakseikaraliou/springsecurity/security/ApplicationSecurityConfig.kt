@@ -17,6 +17,7 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
 
     override fun configure(http: HttpSecurity) {
         http
+                .csrf().disable()
                 .httpBasic()
                 .and()
                 .authorizeRequests()
@@ -40,7 +41,7 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
                 .build()
 
         val tomUser = User.builder()
-                .username("linda")
+                .username("tom")
                 .password(passwordEncoder.encode("password123"))
                 .roles(ADMIN_TRAINEE.name)
                 .build()
