@@ -3,6 +3,7 @@ package com.github.aliakseikaraliou.springsecurity.security
 import com.github.aliakseikaraliou.springsecurity.security.ApplicationUserRole.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -22,7 +23,10 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "index").permitAll()
-                .antMatchers("/api/**").hasRole(STUDENT.name)
+                .antMatchers(HttpMethod.POST, "/api/management/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.name)
+                .antMatchers(HttpMethod.PUT, "/api/management/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.name)
+                .antMatchers(HttpMethod.DELETE, "/api/management/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.name)
+                .antMatchers("/api/management/**").hasAnyRole(ADMIN.name, ADMIN_TRAINEE.name)
                 .anyRequest().authenticated()
     }
 
