@@ -7,11 +7,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
 
 @Configuration
 @EnableWebSecurity
-class ApplicationSecurityConfig : WebSecurityConfigurerAdapter() {
+class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http
@@ -26,7 +27,7 @@ class ApplicationSecurityConfig : WebSecurityConfigurerAdapter() {
     override fun userDetailsService(): UserDetailsService {
         val annaSmithUser = User.builder()
                 .username("annasmith")
-                .password("password")
+                .password(passwordEncoder.encode("password"))
                 .roles("STUDENT") //ROLE_STUDENT
                 .build()
 
