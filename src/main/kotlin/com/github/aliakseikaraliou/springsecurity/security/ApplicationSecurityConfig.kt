@@ -22,6 +22,7 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "index").permitAll()
+                .antMatchers("/api/**").hasRole(STUDENT.name)
                 .anyRequest().authenticated()
     }
 
