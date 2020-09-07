@@ -4,5 +4,6 @@ import com.github.aliakseikaraliou.springsecurity.security.ApplicationUserPermis
 
 enum class ApplicationUserRole(val permissions: Set<ApplicationUserPermission>) {
     STUDENT(emptySet()),
-    ADMIN(setOf(COURSE_READ, COURSE_WRITE, STUDENT_READ, STUDENT_WRITE))
+    ADMIN(setOf(COURSE_READ, COURSE_WRITE, STUDENT_READ, STUDENT_WRITE)),
+    ADMIN_TRAINEE(setOf(COURSE_READ, STUDENT_READ))
 }

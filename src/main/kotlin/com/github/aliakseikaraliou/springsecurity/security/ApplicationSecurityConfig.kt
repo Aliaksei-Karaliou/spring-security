@@ -1,7 +1,6 @@
 package com.github.aliakseikaraliou.springsecurity.security
 
-import com.github.aliakseikaraliou.springsecurity.security.ApplicationUserRole.ADMIN
-import com.github.aliakseikaraliou.springsecurity.security.ApplicationUserRole.STUDENT
+import com.github.aliakseikaraliou.springsecurity.security.ApplicationUserRole.*
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -31,7 +30,7 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
         val annaSmithUser = User.builder()
                 .username("annasmith")
                 .password(passwordEncoder.encode("password"))
-                .roles(STUDENT.name) //ROLE_STUDENT
+                .roles(STUDENT.name)
                 .build()
 
         val lindaUser = User.builder()
@@ -40,6 +39,16 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
                 .roles(ADMIN.name)
                 .build()
 
-        return InMemoryUserDetailsManager(annaSmithUser, lindaUser)
+        val tomUser = User.builder()
+                .username("linda")
+                .password(passwordEncoder.encode("password123"))
+                .roles(ADMIN_TRAINEE.name)
+                .build()
+
+        return InMemoryUserDetailsManager(
+                annaSmithUser,
+                lindaUser,
+                tomUser
+        )
     }
 }
