@@ -35,19 +35,22 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
         val annaSmithUser = User.builder()
                 .username("annasmith")
                 .password(passwordEncoder.encode("password"))
-                .roles(STUDENT.name)
+//                .roles(STUDENT.name)
+                .authorities(STUDENT.authorities)
                 .build()
 
         val lindaUser = User.builder()
                 .username("linda")
                 .password(passwordEncoder.encode("password123"))
-                .roles(ADMIN.name)
+//                .roles(ADMIN.name)
+                .authorities(ADMIN.authorities)
                 .build()
 
         val tomUser = User.builder()
                 .username("tom")
                 .password(passwordEncoder.encode("password123"))
-                .roles(ADMIN_TRAINEE.name)
+//                .roles(ADMIN_TRAINEE.name)
+                .authorities(ADMIN_TRAINEE.authorities)
                 .build()
 
         return InMemoryUserDetailsManager(
