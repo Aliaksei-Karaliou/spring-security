@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository
+
 
 @Configuration
 @EnableWebSecurity
@@ -18,7 +20,6 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
 
     override fun configure(http: HttpSecurity) {
         http
-                .csrf().disable()
                 .httpBasic()
                 .and()
                 .authorizeRequests()
@@ -28,6 +29,8 @@ class ApplicationSecurityConfig(val passwordEncoder: PasswordEncoder) : WebSecur
                 .antMatchers(HttpMethod.DELETE, "/api/management/**").hasAuthority(ApplicationUserPermission.COURSE_WRITE.permission)
                 .antMatchers("/api/management/**").hasAnyRole(ADMIN.name, ADMIN_TRAINEE.name)
                 .anyRequest().authenticated()
+                .and()
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
     }
 
     @Bean
